@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
 @export var SPEED = 200.0
-@export var POST_DASH_SPEED = 100.0
-@export var POST_DASH_SPEED_REDUCTION_TIME = 0.5
-@export var DASH_SPEED = 800.0
-@export var DASH_TIME = 0.02
+@export var POST_DASH_SPEED = 70.0
+@export var POST_DASH_SPEED_REDUCTION_TIME = 1.0
+@export var DASH_SPEED = 400.0
+@export var DASH_TIME = 0.14
 @export var DASH_COOLDOWN = 1.0
-@export var POST_DASH_BRAKE_TIME = 0.04
+@export var POST_DASH_BRAKE_TIME = 0.14
 
 const ACCELERATION = 1500.0
 const FRICTION = 1000.0
-const POST_DASH_FRICTION = 16000.0
+const POST_DASH_FRICTION = 10000.0
 
 var dash_timer = 0.0
 var dash_cooldown = 0.0
