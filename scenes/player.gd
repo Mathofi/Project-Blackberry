@@ -1,22 +1,28 @@
 extends CharacterBody3D
 
-@export var SPEED = 14.0
-@export var POST_DASH_SPEED = 5.0
-@export var POST_DASH_SPEED_REDUCTION_TIME = 1.0
-@export var DASH_SPEED = 50.0
-@export var DASH_TIME = 0.0005
-@export var DASH_COOLDOWN = 1.0
-@export var POST_DASH_BRAKE_TIME = 0.0005
+@export var SPEED := 14.0
+@export var POST_DASH_SPEED := 5.0
+@export var POST_DASH_SPEED_REDUCTION_TIME := 1.0
+@export var DASH_SPEED := 50.0
+@export var DASH_TIME := 0.0005
+@export var DASH_COOLDOWN := 1.0
+@export var POST_DASH_BRAKE_TIME := 0.0005
 
-const ACCELERATION = 80.0
-const FRICTION = 40.0
-const POST_DASH_FRICTION = 500.0
+@onready var model : Node3D = $"Node3D/StaticBody3D/Dwarf Idle"
 
-var dash_timer = 0.0
-var dash_cooldown = 0.0
-var dash_direction = Vector3.ZERO
-var post_dash_brake_timer = 0.0
-var post_dash_slow_timer = 0.0
+const ACCELERATION := 80.0
+const FRICTION := 40.0
+const POST_DASH_FRICTION := 500.0
+
+var dash_timer := 0.0
+var dash_cooldown := 0.0
+var dash_direction := Vector3.ZERO
+var post_dash_brake_timer := 0.0
+var post_dash_slow_timer := 0.0
+
+var model_target_angle := 0.0
+var model_current_angle := 0.0
+var elapsed := 0.0
 
 func _physics_process(delta: float) -> void:
 	# Timers
@@ -50,7 +56,12 @@ func _physics_process(delta: float) -> void:
 		var accel = POST_DASH_FRICTION if post_dash_brake_timer > 0 else (ACCELERATION if input_vector != Vector3.ZERO else FRICTION)
 		velocity.x = move_toward(velocity.x, target.x, accel * delta)
 		velocity.z = move_toward(velocity.z, target.z, accel * delta)
+		
+		
+		if input_vector != Vector3.ZERO: model_target_angle = atan2(input_vector.x, input_vector.z)
 
+	model.rotation.y = lerp_angle(model.rotation.y, model_target_angle, 0.15)
+	
 	move_and_slide()
 
 func _get_input_vector() -> Vector3:

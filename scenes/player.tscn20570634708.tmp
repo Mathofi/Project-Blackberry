@@ -10,7 +10,7 @@ size = Vector3(0.0278174, 0.1, 0.02)
 script = ExtResource("1_g2els")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3.46482, 5.56748)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 5.08506, 9.23209)
 current = true
 fov = 84.1
 
